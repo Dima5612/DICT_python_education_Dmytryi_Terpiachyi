@@ -14,3 +14,13 @@ a = int(input("Now I will prove to you that I can count to any number you want.\
 for i in range(a +1):
     print(str(i)+ "!")
 print("Completed, have a nice day!")
+print("let's test you.\nAre you human ?")
+print("1 Yes \n2.No")
+while True:
+    k = int(input(">"))
+    if k==1:
+        print("Congratulations, have a nice day!")
+        break
+    else:
+        print("Please, try again.")
+
