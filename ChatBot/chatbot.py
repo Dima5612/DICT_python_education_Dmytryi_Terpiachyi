@@ -15,12 +15,11 @@ for i in range(a +1):
     print(str(i)+ "!")
 print("Completed, have a nice day!")
 print("let's test you.\nAre you human ?")
-print("1 Yes \n2.No")
+print("1.Yes \n 2.No")
 while True:
     k = int(input(">"))
-    if k==1:
+    if k == 1:
         print("Congratulations, have a nice day!")
         break
     else:
         print("Please, try again.")
-
