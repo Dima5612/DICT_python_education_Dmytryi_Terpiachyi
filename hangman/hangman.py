@@ -2,7 +2,7 @@ import random
 
 print("HANGMAN")
 print("The game will be available soon.")
-WORLDS = ["python", "java"]
+WORLDS = ["python", "java", "php", "C++"]
 word = random.choice(WORLDS)
 a = input("Guess the word :\n"">")
 while True:
