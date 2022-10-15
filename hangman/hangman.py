@@ -6,20 +6,19 @@ WORLDS = ["python", "java", "php", "javascript"]
 word = random.choice(WORLDS)
 remember_letters = []
 all_letters = list(set(word))
-words=''.join([i if i in remember_letters else "_"for i in word])
+words = ''.join([i if i in remember_letters else "_"for i in word])
 print(words)
 life = 8
 while life > 0:
-    letter=input("input a letter:")
+    letter = input("input a letter:")
     if letter in word and letter not in remember_letters:
         remember_letters.append(letter)
         all_letters.remove(letter)
-    else:
-        life-=1
+    if letter not in word:
+        life -= 1
         print("That letter doesn`s appear un the word")
-        if letter in remember_letters:
-            life -= 1
-            print("No improvements")
+    if letter in remember_letters:
+        print("")
     words = ''.join([i if i in remember_letters else "_" for i in word])
     print(words)
     if len(all_letters) == 0:
