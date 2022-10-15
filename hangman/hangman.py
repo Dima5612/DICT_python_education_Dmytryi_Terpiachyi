@@ -16,6 +16,10 @@ while life > 0:
         all_letters.remove(letter)
     else:
         life-=1
+        print("That letter doesn`s appear un the word")
+        if letter in remember_letters:
+            life -= 1
+            print("No improvements")
     words = ''.join([i if i in remember_letters else "_" for i in word])
     print(words)
     if len(all_letters) == 0:
