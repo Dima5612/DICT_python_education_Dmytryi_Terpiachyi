@@ -13,9 +13,9 @@ duty = int(input('Enter the total amount:\n>'))
 print('Do you want to use the "Who is lucky?" feature? Write Yes/No:')
 lucky = yes_or_no[input("-").lower()]
 lucky_name = ''
-if lacky:
+if lucky:
     lucky_name = random.choice(list(Debtors.keys()))
-    print("lucky_name, is the lucky one!")
+    print(lucky_name," is the lucky one!")
 else:
     print("No one is going to be lucky")
 a = round(duty/number, 2)
