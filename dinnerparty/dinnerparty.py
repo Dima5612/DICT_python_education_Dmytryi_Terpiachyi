@@ -1,13 +1,23 @@
-number =int(input("Enter the number of friends joining (including you):\n>"))
+import random
+yes_or_no = {'yes': True, 'no': False}
+number = int(input("Enter the number of friends joining (including you):\n>"))
 if number <= 0:
     print('No one is joining for the party.')
-    exit ()
+    exit()
 Debtors = {}
 print('Enter the name of every friend (including you), each on a new line:')
 for _ in range(number):
     name = input("-")
     Debtors[name] = 0
 duty = int(input('Enter the total amount:\n>'))
+print('Do you want to use the "Who is lucky?" feature? Write Yes/No:')
+lucky = yes_or_no[input("-").lower()]
+lucky_name = ''
+if lacky:
+    lucky_name = random.choice(list(Debtors.keys()))
+    print("lucky_name, is the lucky one!")
+else:
+    print("No one is going to be lucky")
 a = round(duty/number, 2)
 for name in Debtors:
     Debtors[name] = a
