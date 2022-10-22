@@ -15,10 +15,12 @@ lucky = yes_or_no[input("-").lower()]
 lucky_name = ''
 if lucky:
     lucky_name = random.choice(list(Debtors.keys()))
-    print(lucky_name," is the lucky one!")
+    print(lucky_name, "is the lucky one!")
 else:
     print("No one is going to be lucky")
-a = round(duty/number, 2)
-for name in Debtors:
-    Debtors[name] = a
+all_duty = round(duty/(number - int(lucky)), 2)
+for q in Debtors.keys():
+    Debtors[q] = all_duty
+if lucky:
+    Debtors[lucky_name] = 0
 print(Debtors)
