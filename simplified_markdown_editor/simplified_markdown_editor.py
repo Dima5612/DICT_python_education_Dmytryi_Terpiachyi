@@ -1,18 +1,38 @@
-formatters = ['plain', 'bold', 'italic', 'header', 'link', 'inline-code', 'ordered-list', 'unordered-list', 'new-line']
-commands = ['!help', '!done']
+import re
 
-def print_help():
-    print('Available formatters: ' + ' '.join(formatters))
-    print('Special commands: ' + ' '.join(commands))
+markdown = ""
 
-user_input = input('Choose a formatter: ')
+while True:
+    formatter = input("Choose a formatter: > ")
+    if formatter == "!done":
+        break
 
-while user_input != '!done':
-    if user_input == '!help':
-        print_help()
-    elif user_input in formatters:
-        print(f'{user_input}')
-    else:
-        print('Unknown formatting type or command')
+    if formatter == "new-line":
+        markdown += "\n"
+        print(markdown)
+        continue
 
-    user_input = input('Choose a formatter: ')
+    if formatter == "plain":
+        text = input("Text: > ")
+        markdown += text + "\n"
+        print(markdown)
+        continue
+
+    if formatter == "header":
+        level = input("Level: > ")
+        text = input("Text: > ")
+        if not level.isdigit() or int(level) < 1 or int(level) > 6:
+            print("The level should be within the range of 1 to 6.")
+            continue
+        markdown += "#" * int(level) + " " + text + "\n"
+        print(markdown)
+        continue
+
+    if formatter == "link":
+        label = input("Label: > ")
+        url = input("URL: > ")
+        markdown += "[" + label + "](" + url + ")\n"
+        print(markdown)
+        continue
+
+    print("Unknown formatter type or command")
