@@ -1,87 +1,58 @@
-#import re
-#
-#markdown = ""
-#
-#while True:
-#    formatter = input("Choose a formatter: > ")
-#    if formatter == "!done":
-#        break
-#
-#    if formatter == "new-line":
-#        markdown += "\n"
-#        print(markdown)
-#        continue
-#
-#    if formatter == "plain":
-#        text = input("Text: > ")
-#        markdown += text + "\n"
-#        print(markdown)
-#        continue
-#
-#    if formatter == "header":
-#        level = input("Level: > ")
-#        text = input("Text: > ")
-#        if not level.isdigit() or int(level) < 1 or int(level) > 6:
-#            print("The level should be within the range of 1 to 6.")
-#           continue
-#        markdown += "#" * int(level) + " " + text + "\n"
-#        print(markdown)
-#        continue
-#
-#    if formatter == "link":
-#        label = input("Label: > ")
-#        url = input("URL: > ")
-#        markdown += "[" + label + "](" + url + ")\n"
-#        print(markdown)
-#        continue
-#
-#    print("Unknown formatter type or command")
+markdown = []
+str_parameter = "plain bold italic header link inline-code ordered-list unordered-list new-line"
+parameter = ["plain", "bold", "italic",
+             "header", "link", "inline-code",
+             "ordered-list", "unordered-list", "new-line"]
 
-def print_ordered_list(rows):
-    for i in range(len(rows)):
-        print(f"{i+1}. {rows[i]}")
-
-def print_unordered_list(rows):
-    for row in rows:
-        print(f"* {row}")
-
-while True:
-    formatter = input("Choose a formatter: ")
-    if formatter == "!done":
-        break
-    elif formatter == "ordered-list":
-        while True:
-            num_rows = input("Number of rows: ")
-            if num_rows.isdigit() and int(num_rows) > 0:
-                rows = []
-                for i in range(int(num_rows)):
-                    row = input(f"Row #{i+1}: ")
-                    rows.append(row)
-                print_ordered_list(rows)
-                break
-            else:
-                print("The number of rows should be greater than zero")
-    elif formatter == "unordered-list":
-        while True:
-            num_rows = input("Number of rows: ")
-            if num_rows.isdigit() and int(num_rows) > 0:
-                rows = []
-                for i in range(int(num_rows)):
-                    row = input(f"Row #{i+1}: ")
-                    rows.append(row)
-                print_unordered_list(rows)
-                break
-            else:
-                print("The number of rows should be greater than zero")
-    else:
-        print("Invalid formatter")
-
-
-        def print_ordered_list(rows):
-            for i in range(len(rows)):
-                if i == 1:
-                    print(f"2. {rows[1]}")
-                elif i == 2:
-                    print(f"3. {rows[2]}")
+def redactor():
+    global markdown, str_parameter, parameter
+    while True:
+        print("\n".join(markdown))
+        choice = input("Choose a formatter: ")
+        if choice == "!help":
+            print(f"Available formatters: {str_parameter}")
+        elif choice == "!done":
+            break
+        elif choice == parameter[0]:
+            text = input("Text: ")
+            markdown.append(text)
+        elif choice == parameter[3]:
+            try:
+                level = int(input("Level: "))
+                if 1 <= level <= 6:
+                    levels = "#" * level
+                    header = input("Text: ")
+                    markdown.append(f"{levels} {header}")
                 else:
-                    print(f"{i + 1}. {rows[i]}")
+                    print("Value must be between 1 and 6")
+            except ValueError:
+                print("Enter a numeric value!")
+        elif choice == parameter[8]:
+            markdown.append(" ")
+        elif choice == parameter[4]:
+            label = input("Label: ")
+            url = input("URL: ")
+            markdown.append(f"""[{label}] ({url})""")
+        elif choice == parameter[6]:
+            try:
+                num_of_rows = int(input("Number of rows: "))
+                for i in range(0, num_of_rows):
+                    row = input(f"Row #{i + 1}: ")
+                    markdown.append(f"{i + 1}. {row}")
+            except ValueError:
+                print("Only numerical values!")
+        elif choice == parameter[7]:
+            try:
+                num_of_rows = int(input("Number of rows: "))
+                for i in range(0, num_of_rows):
+                    row = input(f"Row #{i + 1}: ")
+                    markdown.append(f"* {row}")
+            except ValueError:
+                print("Only numerical values!")
+        else:
+            print("Unknown formatter type or command")
+
+
+with open("output.md", "w+") as f:
+    redactor()
+    f.write(f"""{"".join(markdown)} \n""")
